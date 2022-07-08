@@ -1,0 +1,8 @@
+.fav:hover {
+  color: #F00;
+  cursor: pointer;
+}
+
+.pokemon-name:hover {
+  cursor: pointer;
+}
