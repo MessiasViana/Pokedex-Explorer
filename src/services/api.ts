@@ -1,28 +1,33 @@
+import { IPokemonRequests, IPokemonApiRequest } from "../DOTs/IPokemonRequests";
+
 const BASE = "https://pokeapi.co/api/v2/";
 
-export const getPokemonName = async (pokemonName: any) => {
+export const getPokemonName = async (pokemonName: string): Promise<IPokemonRequests | undefined> => {
   try {
-    let url=`${BASE}pokemon/${pokemonName}`;
-    const response = await fetch(url);
-    return await response.json();
-  } catch (error) {
-    console.log("error", error);
+    let url=`${BASE}pokemon/${pokemonName.toLowerCase()}`;
+    const content = await fetch(url);
+    const response: IPokemonRequests = await content.json(); 
+    return response;
+  } catch {
+    return undefined;
   }
 }
-export const getAll = async (limit: number, offset: number) => {
+export const getAll = async (limit: number, offset: number): Promise<IPokemonApiRequest | undefined> => {
   try {
     let url=`${BASE}pokemon/?limit=${limit}&offset=${offset}`;
-    const response = await fetch(url);
-    return await response.json();
-  } catch (error) {
-    console.log("error", error);
+    const content = await fetch(url);
+    const response: IPokemonApiRequest = await content.json(); 
+    return response;
+  } catch {
+    return undefined;
   }
 }
-export const getData = async (url: string) => {
+export const getData = async (url: string): Promise<any> => {
   try {
-    const response = await fetch(url);
-    return await response.json();
-  } catch (error) {
-    console.log("error", error);
+    const content = await fetch(url);
+    const response: Promise<IPokemonRequests[]> = await content.json();
+    return response;
+  } catch {
+    return undefined;
   }
 }

@@ -1,3 +1,7 @@
+.fav {
+  text-decoration: underline;
+}
+
 .fav:hover {
   color: #F00;
   cursor: pointer;
@@ -5,4 +9,26 @@
 
 .pokemon-name:hover {
   cursor: pointer;
+}
+
+.card-area {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.tooglePage {
+  cursor: pointer;
+}
+
+@media(max-width: 992px) {
+  .card-area {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media(max-width: 767px) {
+  .card-area {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

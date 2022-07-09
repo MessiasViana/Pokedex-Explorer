@@ -1,0 +1,11 @@
+@media(max-width: 767px) {
+  .pagination {
+    justify-content: center;
+  }
+  .area-pag-fav {
+    margin-top: 10px;
+  }
+  .SearchBar {
+    flex-direction: column;
+  }
+}

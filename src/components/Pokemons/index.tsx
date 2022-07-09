@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import CardPokemon from '../CardPokemon';
 
 const Pokemons = (props: any) => {
@@ -16,7 +16,7 @@ const Pokemons = (props: any) => {
           </div>
         ) 
       : (
-        <div className="container-sm">
+        <div className="container-sm card-area">
           {listPokemons && listPokemons.map((pokemon:any, index:any) =>
             <CardPokemon key={index} pokemon={pokemon}/>
             )}

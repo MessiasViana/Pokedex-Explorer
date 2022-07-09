@@ -1,40 +1,43 @@
 import React, {useState} from "react";
-import { IPokemonRequests } from "../../DOTs/IPokemonRequests";
-import { getPokemonName } from "../../services/api";
+import './styled.css';
+interface ISearchProps {
+  page: number;
+  allPages: number;
+  setPage: (value: number) => void;
+  onSearch: (value: undefined | string) => Promise<void>;
+}
 
-const SearchBar = (props: any) => {
-  const { page, allPages, setPage } = props;
-  const [search, setSearch] = useState("pikachu");
-  const [pokemon, setPokemon] = useState<IPokemonRequests>();
-  const options = [0, 100, 200, 300];
+const SearchBar = ({ page, allPages, setPage, onSearch }: ISearchProps) => {
+  const [search, setSearch] = useState("");
 
-  const onChange = (e: any) => {
-    setSearch(e.target.value);
+  // pega o valor da busca, se não tiver nada ele passa a props para gerar a lista inicial
+  const onChange = (e: string): void => {
+    setSearch(e);
+    if(e.length === 0) {
+      onSearch(undefined);
+    }
   };
 
-  const buttonClick = () => {
-    searchName(search);
+  const buttonClick = (): void => {
+    onSearch(search);
   }
 
-  const searchName = async(name: any) => {
-    const res = await getPokemonName(name);
-    setPokemon(res);
-  }
-
-  const previusClick = () => {
+  // Mudança de página
+  const previusClick = (): void => {
     if(page > 0) {
       setPage(page - 1)
     }
   }
-  const NextClick = () => {
-    if(page+1 <= allPages) {
+
+  const NextClick = (): void => {
+    if(page + 1 <= allPages) {
       setPage(page + 1)
     }
   }
 
   return (
-    <div className="mb-1  bg-secondary p-3 rounded">
-      <div className="justify-content-around d-flex">
+    <div className="mb-1  mt-3 bg-secondary p-3 rounded container-sm">
+      <div className="justify-content-around d-flex SearchBar">
       
         <div>
           <label  className="form-label fs-3 text-white">Nome do Pokemon:</label>
@@ -43,7 +46,7 @@ const SearchBar = (props: any) => {
               type="text" 
               className="form-control"  
               placeholder="Ex: Bulbasaur"
-              onChange={onChange}
+              onChange={(e) => onChange(e.target.value)}
             />
             <button 
               type="button" 
@@ -53,21 +56,24 @@ const SearchBar = (props: any) => {
           </div>
         </div>
 
-        <div className="d-flex align-middle">
-          <nav>
-            <ul className="pagination">
-              <li className="page-item disabled" onClick={previusClick}>
-                <span className="page-link">Previous</span>
-              </li>
-              <li className="page-item active" aria-current="page">
-                <span className="page-link">{page} de {allPages}</span>
-              </li>
-              
-              <li className="page-item">
-                <span className="page-link" onClick={NextClick}>Next</span>
-              </li>
-            </ul>
-          </nav>
+        
+        <div className="d-flex flex-column text-center  justify-content-between area-pag-fav">
+          <div>
+            <nav>
+              <ul className="pagination">
+                <li className={`page-item${page === 0 ? ' disabled' : ' active'} tooglePage`} onClick={previusClick}>
+                  <span className="page-link  text-black">Voltar</span>
+                </li>
+                <li className="page-item" aria-current="page">
+                  <span className="page-link ">{page + 1} de {allPages}</span>
+                </li>
+                
+                <li className={`page-item${page + 1 < allPages ? ' active' : ' disabled'} tooglePage`}>
+                  <span className="page-link text-black" onClick={NextClick}>Próxima</span>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
       </div>
     </div>

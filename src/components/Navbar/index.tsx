@@ -1,6 +1,6 @@
 import React from "react";
 
-const Nav = () => {
+const Nav: React.FC = () => {
   const pokeLogo = "https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png";
   
   return (
