@@ -1,4 +1,5 @@
 import React from 'react';
+import { IPokemonRequests } from '../../DOTs/IPokemonRequests';
 import CardPokemon from '../CardPokemon';
 
 const Pokemons = (props: any) => {
@@ -17,7 +18,7 @@ const Pokemons = (props: any) => {
         ) 
       : (
         <div className="container-sm card-area">
-          {listPokemons && listPokemons.map((pokemon:any, index:any) =>
+          {listPokemons && listPokemons.map((pokemon: IPokemonRequests, index: number) =>
             <CardPokemon key={index} pokemon={pokemon}/>
             )}
         </div>

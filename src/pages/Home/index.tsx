@@ -22,16 +22,16 @@ const Page = () => {
       setLoading(true);
       setNotFound(false);
 
-    // se tiver algo no localStorage ele entra
-    if (localStorage.getItem("pokemons")) {
+    // se tiver na página inicial ele usa o localStorage
+    if (page === 0 && localStorage.length > 0) {
       const localList: any = localStorage.getItem("pokemons");
       const list = JSON.parse(localList);
-      console.log(list);
       
       // Espera pegar todos os resultados para colocar na lista de pokemons
       const promises = list.results.map(async(pokemon: IPokemonSimple)=> {
         return await getData(pokemon.url);
       });
+      
       // Pega o resultado de cada pokemon(habilidades,etc.)
       const results: any = await Promise.all(promises)
       setPokemons(results);
@@ -39,9 +39,10 @@ const Page = () => {
     } else {
       // Faz a requisição na API e guarda no localStorage
       const res = await getAll(pageItens, pageItens * page);
-      localStorage.setItem("pokemons", JSON.stringify(res));
+      if (page === 0) {
+        localStorage.setItem("pokemons", JSON.stringify(res));
+      }
       
-
       if (res !== undefined) {
           // Espera pegar todos os resultados para colocar na lista de pokemons
           const promises = res.results.map(async(pokemon: IPokemonSimple)=> {

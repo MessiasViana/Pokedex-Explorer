@@ -24,7 +24,6 @@ const CardPokemon: React.FC<CardProps> = ({ pokemon }: CardProps) => {
               alt={`Imagem do ${pokemon.name}`} 
             />
           <div className="card-body d-flex flex-column">
-            
             <div className="card-top">
               <span className="fs-4 me-3 pokemon-name" onClick={() => toogleModal()}>{pokemon.name}</span>
             </div>

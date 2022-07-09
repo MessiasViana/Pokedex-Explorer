@@ -40,7 +40,7 @@ const SearchBar = ({ page, allPages, setPage, onSearch }: ISearchProps) => {
       <div className="justify-content-around d-flex SearchBar">
       
         <div>
-          <label  className="form-label fs-3 text-white">Nome do Pokemon:</label>
+          <label className="form-label fs-3 text-white">Nome do Pokemon:</label>
           <div className="d-flex">
             <input 
               type="text" 
@@ -57,8 +57,8 @@ const SearchBar = ({ page, allPages, setPage, onSearch }: ISearchProps) => {
         </div>
 
         
-        <div className="d-flex flex-column text-center  justify-content-between area-pag-fav">
-          <div>
+        <div className="d-flex justify-content-center area-pag-fav">
+          <div className="mt-auto">
             <nav>
               <ul className="pagination">
                 <li className={`page-item${page === 0 ? ' disabled' : ' active'} tooglePage`} onClick={previusClick}>

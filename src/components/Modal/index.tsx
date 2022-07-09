@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IPokemonRequests } from '../../DOTs/IPokemonRequests';
+import { IPokemon, IPokemonRequests } from '../../DOTs/IPokemonRequests';
 
 interface ModalProps {
   pokemon: IPokemonRequests;
@@ -7,11 +7,9 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({pokemon, display}: ModalProps) => {
-  const [openModal, setOpenModal] = useState(true);
-
-  display(openModal);
+  
   return (
-  <div className={`modal${openModal === true ? ' d-block' : ' d-none'}`}>
+  <div className={`modal d-block`}>
       <div className="modal-dialog">
       <div className="modal-content">
         <div className="modal-header">
@@ -21,12 +19,15 @@ const Modal: React.FC<ModalProps> = ({pokemon, display}: ModalProps) => {
           <p>ID: {pokemon.id}</p>
           <p>XP base: {pokemon.base_experience}</p>
           <p>Altura: {pokemon.height}</p>
-          <p className="d-flex">Tipo: {pokemon.types.map((type:any, index:any) =>
-            <div key={index} className="ms-2">{type.type.name}</div>
+          <p className="d-flex">Tipo: {pokemon.types.map((type: IPokemon, index: number) =>
+            <span key={index} className="ms-2">{type.type.name}</span>
+          )}</p>
+          <p className="d-flex">Habilidade: {pokemon.abilities.map((abilities: IPokemon, index: number) =>
+            <span key={index} className="ms-2">{abilities.ability.name}</span>
           )}</p>
         </div>
         <div className="modal-footer">
-          <button type="button" className="btn btn-primary" onClick={() => setOpenModal(false)}>Fechar</button>
+          <button type="button" className="btn btn-primary" onClick={() => display(false)}>Fechar</button>
         </div>
       </div>
     </div>

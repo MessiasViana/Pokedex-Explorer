@@ -9,6 +9,7 @@ export interface IPokemonRequests {
   types: [];
   id: number;
   height: number;
+  abilities: [];
 }
 
 export interface IPokemonApiRequest {
@@ -19,4 +20,9 @@ export interface IPokemonApiRequest {
 export interface IPokemonSimple {
   name: string;
   url: string;
+}
+
+export interface IPokemon {
+  type: { name: string },
+  ability: { name: string }
 }
