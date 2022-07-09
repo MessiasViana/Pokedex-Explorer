@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IPokemonRequests } from '../../DOTs/IPokemonRequests';
+import { IPokemon, IPokemonRequests } from '../../DOTs/IPokemonRequests';
 import Modal from '../Modal';
 import './styled.css';
 
@@ -26,6 +26,13 @@ const CardPokemon: React.FC<CardProps> = ({ pokemon }: CardProps) => {
           <div className="card-body d-flex flex-column">
             <div className="card-top">
               <span className="fs-4 me-3 pokemon-name" onClick={() => toogleModal()}>{pokemon.name}</span>
+            </div>
+            <div className="card-bottom">
+              <span className="d-flex">Tipo:
+                {pokemon.types.map((type: IPokemon, index: number) =>
+                  <span key={index} className="ms-2 pe-2 ps-2 border border-primary">{type.type.name}</span>
+                )}
+              </span>
             </div>
           </div>
         </div>
