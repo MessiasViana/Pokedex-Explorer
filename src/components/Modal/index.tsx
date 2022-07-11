@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { IPokemon, IPokemonRequests } from '../../DOTs/IPokemonRequests';
 
 interface ModalProps {
@@ -9,7 +9,7 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({pokemon, display}: ModalProps) => {
   
   return (
-  <div className={`modal d-block`}>
+  <div className="modal d-block">
       <div className="modal-dialog">
       <div className="modal-content">
         <div className="modal-header">
@@ -21,7 +21,7 @@ const Modal: React.FC<ModalProps> = ({pokemon, display}: ModalProps) => {
           <p>Altura: {pokemon.height}</p>
             <p className="d-flex">Tipo:
               {pokemon.types.map((type: IPokemon, index: number) =>
-                <span key={index} className="ms-2 pe-2 ps-2 border border-primary">{type.type.name}</span>
+                <span key={index} className={`ms-2 pe-2 ps-2 type-${type.type.name}`}>{type.type.name}</span>
               )}
             </p>
           <p className="d-flex">Habilidade: {pokemon.abilities.map((abilities: IPokemon, index: number) =>

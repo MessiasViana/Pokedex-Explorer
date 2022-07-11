@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+import FavoriteContext from "../../contexts/favoritesContexts";
 import './styled.css';
 interface ISearchProps {
   page: number;
@@ -9,6 +10,7 @@ interface ISearchProps {
 
 const SearchBar = ({ page, allPages, setPage, onSearch }: ISearchProps) => {
   const [search, setSearch] = useState("");
+  const { favoritePokemons } = useContext(FavoriteContext);
 
   // pega o valor da busca, se não tiver nada ele passa a props para gerar a lista inicial
   const onChange = (e: string): void => {
@@ -35,6 +37,7 @@ const SearchBar = ({ page, allPages, setPage, onSearch }: ISearchProps) => {
     }
   }
 
+
   return (
     <div className="mb-1  mt-3 bg-secondary p-3 rounded container-sm">
       <div className="justify-content-around d-flex SearchBar">
@@ -59,11 +62,15 @@ const SearchBar = ({ page, allPages, setPage, onSearch }: ISearchProps) => {
         
         <div className="d-flex justify-content-center area-pag-fav">
           <div className="mt-auto">
+            <div>
+              <span className="fs-5 text-white">Favoritos - {favoritePokemons.length}</span>
+            </div>
             <nav>
               <ul className="pagination">
                 <li className={`page-item${page === 0 ? ' disabled' : ' active'} tooglePage`} onClick={previusClick}>
                   <span className="page-link  text-black">Voltar</span>
                 </li>
+                
                 <li className="page-item" aria-current="page">
                   <span className="page-link ">{page + 1} de {allPages}</span>
                 </li>

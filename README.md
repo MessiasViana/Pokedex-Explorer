@@ -1,5 +1,5 @@
 # PokeApi
-Projeto que lista todos pokemons, com sistema de busca e paginação
+Projeto que lista todos pokemons, com sistema de busca, paginação e localStorage
 
 ## Instalar node_modules
 

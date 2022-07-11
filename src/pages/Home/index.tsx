@@ -7,6 +7,7 @@ import { getAll, getData, getPokemonName } from "../../services/api";
 
 import imageNotFound from "../../assets/images/pokedex.png";
 import { IPokemonRequests, IPokemonSimple } from '../../DOTs/IPokemonRequests';
+import { FavoriteProvider } from '../../contexts/favoritesContexts';
 
 const Page = () => {
   const [loading, setLoading] = useState(false);
@@ -15,15 +16,19 @@ const Page = () => {
 
   const [page, setPage] = useState<number>(0);
   const [allPages, setAllPages] = useState<number>(0);
+
+  const [favorites, setFavorites] = useState<any>( [] );
   
   // coloca a quantidade de itens exibidos na tela
   const pageItens = 30;
+
+  // Função para pegar os pokemons
   const getPokemons = async (): Promise<void> => {
       setLoading(true);
       setNotFound(false);
 
     // se tiver na página inicial ele usa o localStorage
-    if (page === 0 && localStorage.length > 0) {
+    if (page === 0 && localStorage.getItem('pokemons')) {
       const localList: any = localStorage.getItem("pokemons");
       const list = JSON.parse(localList);
       
@@ -58,11 +63,7 @@ const Page = () => {
     setLoading(false);
   }
 
-  // Toda vez que a página muda ele executa a função para pegar a nova lista
-  useEffect(() => {
-    getPokemons();
-  }, [page])
-
+  // Função para acahr os pokemons
   const onSearch = async (pokemon: string | undefined): Promise<void> => {
     // se não tiver nada na busca ele executa a função
     if(!pokemon) {
@@ -86,8 +87,46 @@ const Page = () => {
     setLoading(false)
   }
 
+  // Função para controlar o array de favoritos
+  const updateFavoritePokemons = (name: string) => {
+      const updatedFavorites = [...favorites]
+      const favoriteIndex = favorites.indexOf(name)
+      if(favoriteIndex >= 0) {
+        updatedFavorites.splice(favoriteIndex, 1);
+      }else {
+        updatedFavorites.push(name);
+      }
+      localStorage.setItem("favorites", JSON.stringify(updatedFavorites))
+      setFavorites(updatedFavorites);
+  }
+  
+
+  // colocar a lista de favoritos no localStorage
+  const favoriteLocal = () => {
+    const pokemons: any = localStorage.getItem("favorites");
+    const pokemonsJSON = JSON.parse(pokemons);
+    setFavorites(pokemonsJSON)
+  }
+
+  // Toda vez que a página muda ele executa a função para pegar a nova lista
+  useEffect(() => {
+    getPokemons();
+  }, [page])
+
+  // Se tiver um pokemon favorito no localStorage, roda a função
+  useEffect(() => {
+    if(localStorage.getItem("favorites")) {
+      favoriteLocal();
+    }
+  }, [])
+
   return (
-    <>
+    <FavoriteProvider
+      value={{
+        favoritePokemons: favorites,
+        updateFavorite: updateFavoritePokemons,
+      }}
+    >
       <Nav />
       <SearchBar 
         page={page}
@@ -96,16 +135,17 @@ const Page = () => {
         onSearch={onSearch}
       />
       {notFound ? (
-        <div className='justify-content-center d-flex text-white'>
-          <img src={imageNotFound} alt="Pokemon não encontrado"></img>
-        </div>
-      ) :
-        <Pokemons 
-          listPokemons={pokemons} 
-          loading={loading}
-        />
+          <div className='justify-content-center d-flex text-white'>
+            <img src={imageNotFound} alt="Pokemon não encontrado"></img>
+          </div>
+        ) : (
+          <Pokemons 
+            listPokemons={pokemons} 
+            loading={loading}
+          />
+        )
       }
-    </>
+    </FavoriteProvider>
   
   )
 }

@@ -16,6 +16,106 @@
   cursor: pointer;
 }
 
+.fav-item {
+  cursor: pointer;
+}
+
+.fav-item:hover {
+  color: #F00;
+}
+
+
+.type-normal {
+  border: 1px solid rgb(252, 180, 47);
+  color: rgb(252, 180, 47);
+}
+
+.type-grass {
+  border: 1px solid #17fc03;
+  color: #17fc03;
+}
+
+.type-fire {
+  border: 1px solid #fc3503;
+  color: #fc3503;
+}
+
+.type-water {
+  border: 1px solid #035efc;
+  color: #035efc;
+}
+
+.type-flying {
+  border: 1px solid #91ede2;
+  color: #91ede2;
+}
+
+.type-fighting {
+  border: 1px solid #f5330c;
+  color: #f5330c;
+}
+
+.type-electric {
+  border: 1px solid #aeb400;
+  color: #aeb400;
+}
+
+.type-poison {
+  border: 1px solid #7d02f7;
+  color: #7d02f7;
+}
+
+.type-ground {
+  border: 1px solid #614119;
+  color: #614119;
+}
+
+.type-rock {
+  border: 1px solid #52483c;
+  color: #52483c;
+}
+
+.type-psychic {
+  border: 1px solid #e014d3;
+  color: #e014d3;
+}
+
+.type-ice {
+  border: 1px solid #4989eb;
+  color: #4989eb;
+}
+
+.type-bug {
+  border: 1px solid #026305;
+  color: #026305;
+}
+
+.type-steel {
+  border: 1px solid #353738;
+  color: #353738;
+}
+
+.type-ghost {
+  border: 1px solid #453c57;
+  color: #453c57;
+}
+
+.type-dragon {
+  border: 1px solid #f2340a;
+  color: #f2340a;
+}
+
+.type-dark {
+  border: 1px solid #100330;
+  color: #100330;
+}
+
+.type-fairy {
+  border: 1px solid #f4b8f5;
+  color: #f4b8f5;
+}
+
+
 @media(max-width: 992px) {
   .card-area {
     grid-template-columns: repeat(2, 1fr);
