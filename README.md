@@ -1,7 +1,8 @@
-# PokeApi
+# Pokedex Explorer
 Projeto que lista todos pokemons, com sistema de busca, paginação e localStorage
 
-![PokeAPI](https://user-images.githubusercontent.com/87711032/215368773-648f363a-0140-4ae3-bcce-d6d0198e434b.png)
+![image](https://github.com/MessiasViana/PokeApi/assets/87711032/457c4509-2bbd-4fc3-be60-4f6467a455e2)
+
 
 
 ## Instalar node_modules
