@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Nav from "../../components/Navbar";
+import Header from "../../components/Header";
 import Pokemons from '../../components/Pokemons';
 import SearchBar from "../../components/SearchBar";
 
@@ -127,7 +127,7 @@ const Page = () => {
         updateFavorite: updateFavoritePokemons,
       }}
     >
-      <Nav />
+      <Header />
       <SearchBar 
         page={page}
         setPage={setPage}

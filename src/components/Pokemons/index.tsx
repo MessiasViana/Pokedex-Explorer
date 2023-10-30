@@ -6,9 +6,9 @@ const Pokemons = (props: any) => {
   const { listPokemons, loading } = props;
 
   return (
-    <div className="container-sm mb-5">
+    <div className="container-sm mb-5 mt-5">
       <div className="ts-3 text-white">
-        <h1>Pokemons</h1>
+        <h2>Pokemons</h2>
       </div>
       {loading ? (
           <div>
